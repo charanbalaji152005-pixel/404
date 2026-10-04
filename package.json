@@ -1,7 +1,7 @@
 {
   "name": "animated-404-fox-page",
   "version": "1.0.0",
-  "homepage": "https://github.com/charanbalaji152005-pixel/404/",
+  "homepage": "https://charanbalaji152005-pixel.github.io/404/",
   "type": "module",
   "description": "An animated 404 error page built with React JS and animated SVG.",
   "scripts": {

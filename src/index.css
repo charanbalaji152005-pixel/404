@@ -1,0 +1,1020 @@
+/* ==========================================================================
+   CSS Custom Properties (Theme & Design Tokens)
+   ========================================================================== */
+:root {
+  /* Background Gradients */
+  --bg-gradient-start: #f4f8fc;
+  --bg-gradient-mid: #e5edf7;
+  --bg-gradient-end: #d6e2f1;
+
+  /* Primary Brand / 404 Accent */
+  --brand-blue: #0b7fd6;
+  --brand-blue-hover: #0866ad;
+  --brand-blue-light: #38bdf8;
+  --brand-glow: rgba(11, 127, 214, 0.45);
+  --brand-glow-subtle: rgba(11, 127, 214, 0.18);
+
+  /* Typography Colors */
+  --text-dark: #1e293b;
+  --text-muted: #64748b;
+  --text-error-label: #475569;
+
+  /* Illustration Colors: Fox */
+  --fox-orange: #f97316;
+  --fox-orange-deep: #ea580c;
+  --fox-white: #ffffff;
+  --fox-chest: #fff7ed;
+  --fox-ear-dark: #1e293b;
+  --fox-ear-pink: #fda4af;
+  --fox-nose: #0f172a;
+
+  /* Illustration Colors: Tech Elements */
+  --monitor-chassis: #f8fafc;
+  --monitor-bezel: #1e293b;
+  --monitor-screen: #0b1a2d;
+  --monitor-graph: #22d3ee;
+  --monitor-led: #10b981;
+
+  --server-tower: #2e1c47;
+  --server-dark: #1f1230;
+  --server-drawer: #3d265d;
+  --server-drawer-accent: #4c3074;
+  --server-handle: #94a3b8;
+
+  /* Environment Colors */
+  --grass-green: #22c55e;
+  --grass-green-light: #4ade80;
+  --grass-green-dark: #16a34a;
+  --grass-soil: #14532d;
+  --outline-dark: #1e293b;
+
+  /* Cable & Electric Surge */
+  --cable-dark: #1e293b;
+  --cable-core: #334155;
+  --cable-electric: #00f0ff;
+  --cable-electric-pulse: #7dd3fc;
+
+  /* Animation Duration */
+  --loop-duration: 6s;
+
+  /* Fonts */
+  --font-display: 'Fredoka', 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+/* ==========================================================================
+   Global Resets & Base Layout
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  font-family: var(--font-body);
+  background: linear-gradient(160deg, var(--bg-gradient-start) 0%, var(--bg-gradient-mid) 50%, var(--bg-gradient-end) 100%);
+  color: var(--text-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.25rem;
+  overflow-x: hidden;
+  position: relative;
+}
+
+#root {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Ambient background decor */
+.ambient-glow {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(600px, 90vw);
+  height: 350px;
+  background: radial-gradient(ellipse at center, rgba(11, 127, 214, 0.12) 0%, rgba(255, 255, 255, 0) 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Main Container */
+.error-container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* ==========================================================================
+   Header: 404 & ERROR Label
+   ========================================================================== */
+.header-group {
+  margin-bottom: 0.75rem;
+  user-select: none;
+}
+
+.error-code {
+  font-family: var(--font-display);
+  font-size: clamp(5.5rem, 15vw, 8.5rem);
+  font-weight: 800;
+  line-height: 0.95;
+  color: var(--brand-blue);
+  letter-spacing: -0.04em;
+  text-shadow: 
+    0 4px 18px var(--brand-glow),
+    0 0 35px var(--brand-glow-subtle);
+  display: inline-block;
+  animation: gentleFloat 5s ease-in-out infinite;
+}
+
+.error-label {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(0.8rem, 2.5vw, 1.05rem);
+  font-weight: 800;
+  letter-spacing: 0.45em;
+  text-transform: uppercase;
+  color: var(--text-error-label);
+  margin-top: 0.35rem;
+  opacity: 0.85;
+}
+
+/* ==========================================================================
+   SVG Scene Styling
+   ========================================================================== */
+.scene-wrapper {
+  width: 100%;
+  max-width: 640px;
+  margin: 0.5rem 0 1.5rem;
+  position: relative;
+  filter: drop-shadow(0 12px 24px rgba(30, 41, 59, 0.08));
+}
+
+.scene-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+
+/* SVG Outlines & General Styles */
+.thick-stroke {
+  stroke: var(--outline-dark);
+  stroke-width: 4px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.medium-stroke {
+  stroke: var(--outline-dark);
+  stroke-width: 3px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Monitor Screen Oscilloscope Graph */
+.monitor-graph-line {
+  stroke-dasharray: 80;
+  stroke-dashoffset: 0;
+  animation: graphPulse 2.5s linear infinite;
+}
+
+/* Server LED Status Lights */
+.led-blink-1 {
+  animation: ledFlicker 1.8s steps(2, start) infinite;
+}
+.led-blink-2 {
+  animation: ledFlicker 2.4s steps(2, start) infinite 0.4s;
+}
+.led-blink-3 {
+  animation: ledFlicker 1.5s steps(2, start) infinite 0.8s;
+}
+.led-blink-4 {
+  animation: ledFlicker 3s steps(2, start) infinite 0.2s;
+}
+
+/* ==========================================================================
+   Cable & Electric Pulse Keyframe Animation (~6 seconds)
+/* ==========================================================================
+   Cable & Electric Surge Keyframe Animation (~6 seconds)
+   - Sagging at ground rest
+   - Lifts up taut as the fox lifts up (22% - 27%)
+   - Electric surge pulses through cable during shock (28% - 62%)
+   - Lowers back down with fox (63% - 70%)
+   ========================================================================== */
+/* Resting Sagging Cable Layer */
+.cable-sagging-layer {
+  opacity: 1;
+  transition: opacity 0.15s ease;
+  animation: cableSagCycle var(--loop-duration) ease-in-out infinite;
+}
+
+@keyframes cableSagCycle {
+  0%, 21% {
+    opacity: 1;
+  }
+  26%, 63% {
+    opacity: 0;
+  }
+  69%, 100% {
+    opacity: 1;
+  }
+}
+
+/* Lifted Taut Cable Layer */
+.cable-taut-layer {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  animation: cableTautCycle var(--loop-duration) ease-in-out infinite;
+}
+
+@keyframes cableTautCycle {
+  0%, 21% {
+    opacity: 0;
+  }
+  26%, 63% {
+    opacity: 1;
+  }
+  69%, 100% {
+    opacity: 0;
+  }
+}
+
+/* Electric Glowing Energy Surge (Active along the lifted cable during shock) */
+.cable-electric-pulse {
+  stroke-dasharray: 24 36;
+  stroke-dashoffset: 300;
+  opacity: 0;
+  filter: drop-shadow(0 0 8px var(--cable-electric));
+  animation: electricSurgeCycle var(--loop-duration) linear infinite;
+}
+
+.cable-electric-pulse.force-active {
+  opacity: 1 !important;
+  animation: electricSurgeFast 0.3s linear infinite !important;
+}
+
+@keyframes electricSurgeCycle {
+  0%, 27% {
+    opacity: 0;
+    stroke-dashoffset: 300;
+  }
+  28% {
+    opacity: 0.9;
+  }
+  30%, 61% {
+    opacity: 1;
+    stroke-dashoffset: 0;
+  }
+  63% {
+    opacity: 0.3;
+    stroke-dashoffset: -120;
+  }
+  65%, 100% {
+    opacity: 0;
+    stroke-dashoffset: -120;
+  }
+}
+
+@keyframes electricSurgeFast {
+  0% {
+    stroke-dashoffset: 100;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* ==========================================================================
+   FOX CHARACTER: LIFTS UP BEFORE ELECTRIC SHOCK APPEARS
+   - Stays centered horizontally.
+   - 0% - 18%: Calm idle, gentle tail wag & eye blink at ground level.
+   - 18% - 21%: Anticipation crouch.
+   - 22% - 27%: LIFTS UP into mid-air before shock appears!
+   - 28% - 62%: THE SHOCK APPEARS IN MID-AIR! Rapid electric jitter, flashing aura,
+     lightning sparks crackling, shocked wide eyes & gasping mouth, frizzed tail.
+   - 63% - 70%: Fox lowers back down to the ground.
+   - 72% - 84%: After-shock dazed state with smoke drifting up, shakes head.
+   - 86% - 100%: Resets to calm idle.
+   ========================================================================== */
+.fox-character-fixed {
+  transform-origin: 318px 260px;
+  animation: foxElectricShock var(--loop-duration) ease-in-out infinite;
+  cursor: pointer;
+  user-select: none;
+}
+
+.fox-character-fixed:hover {
+  filter: drop-shadow(0 0 8px rgba(0, 240, 255, 0.4));
+}
+
+/* Manual click trigger: instant bonus lift and shock */
+.fox-character-fixed.shock-manual-active {
+  animation: foxManualZap 0.15s linear infinite !important;
+}
+
+@keyframes foxManualZap {
+  0% { transform: translate(-3px, -72px) rotate(2deg); filter: drop-shadow(0 0 16px #00f0ff) drop-shadow(0 0 20px #facc15) brightness(1.3); }
+  25% { transform: translate(3px, -76px) rotate(-2deg); filter: drop-shadow(0 0 22px #ffffff) brightness(1.4); }
+  50% { transform: translate(-4px, -73px) rotate(2.5deg); filter: drop-shadow(0 0 16px #00f0ff); }
+  75% { transform: translate(4px, -72px) rotate(-2.5deg); filter: drop-shadow(0 0 20px #facc15) brightness(1.3); }
+  100% { transform: translate(-3px, -72px) rotate(2deg); }
+}
+
+@keyframes foxElectricShock {
+  /* 0% - 18%: Calm peaceful idle at ground level */
+  0%, 18% {
+    transform: translate(0px, 0px) rotate(0deg) scale(1, 1);
+    filter: none;
+  }
+  10% {
+    transform: translate(0px, -1px) rotate(0deg) scale(1.008, 0.992);
+  }
+
+  /* 19% - 21%: Anticipation crouch before lifting */
+  20% {
+    transform: translate(0px, 4px) rotate(0deg) scale(1.06, 0.94);
+    filter: none;
+  }
+
+  /* 22% - 27%: LIFT UP BEFORE SHOCK APPEARS! */
+  23% {
+    transform: translate(0px, -20px) rotate(0deg) scale(0.96, 1.05);
+    filter: none;
+  }
+  25% {
+    transform: translate(0px, -55px) rotate(0deg) scale(0.98, 1.02);
+    filter: none;
+  }
+  27% {
+    /* Reaches apex of lift - shock about to begin */
+    transform: translate(0px, -74px) rotate(0deg) scale(1, 1);
+    filter: drop-shadow(0 0 4px #00f0ff);
+  }
+
+  /* 28% - 62%: HIGH-VOLTAGE ELECTRIC SHOCK IN LIFTED POSITION */
+  28% { transform: translate(-3px, -72px) rotate(1.8deg); filter: drop-shadow(0 0 12px #00f0ff) drop-shadow(0 0 16px #facc15) brightness(1.25); }
+  30% { transform: translate(3px, -76px) rotate(-1.8deg); filter: drop-shadow(0 0 18px #ffffff) brightness(1.35); }
+  32% { transform: translate(-4px, -73px) rotate(2.2deg); filter: drop-shadow(0 0 14px #00f0ff) drop-shadow(0 0 22px #facc15); }
+  34% { transform: translate(4px, -72px) rotate(-2deg); filter: drop-shadow(0 0 20px #ffffff) brightness(1.3); }
+  36% { transform: translate(-3px, -76px) rotate(1.5deg); filter: drop-shadow(0 0 16px #00f0ff); }
+  38% { transform: translate(4px, -73px) rotate(-1.8deg); filter: drop-shadow(0 0 18px #facc15) brightness(1.25); }
+  40% { transform: translate(-2px, -71px) rotate(2deg); filter: drop-shadow(0 0 22px #ffffff) brightness(1.4); }
+  42% { transform: translate(3px, -76px) rotate(-2deg); filter: drop-shadow(0 0 14px #00f0ff); }
+  44% { transform: translate(-4px, -73px) rotate(2.2deg); filter: drop-shadow(0 0 20px #facc15) brightness(1.3); }
+  46% { transform: translate(3px, -77px) rotate(-1.8deg); filter: drop-shadow(0 0 16px #00f0ff); }
+  48% { transform: translate(-3px, -72px) rotate(2deg); filter: drop-shadow(0 0 22px #ffffff) brightness(1.4); }
+  50% { transform: translate(4px, -75px) rotate(-2.2deg); filter: drop-shadow(0 0 18px #00f0ff) brightness(1.3); }
+  52% { transform: translate(-2px, -71px) rotate(1.8deg); filter: drop-shadow(0 0 16px #facc15); }
+  54% { transform: translate(3px, -76px) rotate(-1.8deg); filter: drop-shadow(0 0 24px #ffffff) brightness(1.35); }
+  56% { transform: translate(-4px, -73px) rotate(2deg); filter: drop-shadow(0 0 15px #00f0ff); }
+  58% { transform: translate(3px, -72px) rotate(-1.5deg); filter: drop-shadow(0 0 18px #facc15); }
+  60% { transform: translate(-2px, -75px) rotate(1.2deg); filter: drop-shadow(0 0 12px #00f0ff); }
+  62% { transform: translate(1px, -73px) rotate(-0.5deg); filter: none; }
+
+  /* 63% - 70%: LOWERING & LANDING BACK TO GROUND */
+  64% {
+    transform: translate(0px, -50px) rotate(0deg) scale(0.96, 1.04);
+    filter: none;
+  }
+  67% {
+    transform: translate(0px, -20px) rotate(0deg) scale(0.98, 1.02);
+  }
+  70% {
+    /* Touchdown on grass with landing impact squash */
+    transform: translate(0px, 4px) rotate(0deg) scale(1.08, 0.92);
+  }
+  72% {
+    /* Soft bounce */
+    transform: translate(0px, 1px) rotate(0deg) scale(0.98, 1.02);
+  }
+
+  /* 74% - 84%: After-shock dazed state & head shake recovery */
+  74% {
+    transform: translate(0px, 2px) rotate(0deg) scale(1, 1);
+  }
+  77% {
+    transform: translate(-2px, 0px) rotate(-3.5deg);
+  }
+  80% {
+    transform: translate(2px, 0px) rotate(3.5deg);
+  }
+  83% {
+    transform: translate(-1px, 0px) rotate(-1.5deg);
+  }
+  86% {
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+  100% {
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+}
+
+/* Tail: Idle wag -> lifts -> frizzles violently during shock -> descends -> recovers */
+.fox-tail-shockable {
+  transform-box: fill-box;
+  transform-origin: 85% 85%;
+  animation: tailShockCycle var(--loop-duration) ease-in-out infinite;
+}
+
+@keyframes tailShockCycle {
+  /* Calm idle wag at ground level */
+  0%, 18% {
+    transform: rotate(0deg) scale(1, 1);
+  }
+  6% {
+    transform: rotate(-10deg);
+  }
+  14% {
+    transform: rotate(10deg);
+  }
+
+  /* 22% - 27%: Lifting up (tail stretches down with gravity) */
+  22% {
+    transform: rotate(2deg);
+  }
+  24% {
+    transform: rotate(-14deg) scaleY(1.08);
+  }
+  27% {
+    transform: rotate(-10deg) scaleY(1.05);
+  }
+
+  /* 28% - 62%: Electric shock: frizzed, puffed, vibrating violently */
+  28% { transform: rotate(18deg) scale(1.18); }
+  31% { transform: rotate(-16deg) scale(1.2); }
+  34% { transform: rotate(20deg) scale(1.16); }
+  37% { transform: rotate(-18deg) scale(1.22); }
+  40% { transform: rotate(16deg) scale(1.18); }
+  43% { transform: rotate(-20deg) scale(1.2); }
+  46% { transform: rotate(18deg) scale(1.16); }
+  49% { transform: rotate(-16deg) scale(1.22); }
+  52% { transform: rotate(20deg) scale(1.18); }
+  55% { transform: rotate(-18deg) scale(1.2); }
+  58% { transform: rotate(14deg) scale(1.15); }
+  60% { transform: rotate(-10deg) scale(1.1); }
+  62% { transform: rotate(5deg) scale(1.05); }
+
+  /* 64% - 70%: Lowering down (tail swooshes slightly upward) */
+  65% {
+    transform: rotate(15deg);
+  }
+  70% {
+    transform: rotate(-12deg);
+  }
+
+  /* 72% - 84%: After-shock droop and recovery */
+  74% {
+    transform: rotate(8deg) scale(0.96, 0.96);
+  }
+  78% {
+    transform: rotate(-6deg);
+  }
+  84% {
+    transform: rotate(4deg);
+  }
+  100% {
+    transform: rotate(0deg) scale(1, 1);
+  }
+}
+
+/* Ears: Perked up, twitching furiously with electricity during shock */
+.fox-ears-shockable {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: earsShockCycle var(--loop-duration) ease-in-out infinite;
+}
+
+@keyframes earsShockCycle {
+  0%, 20% {
+    transform: rotate(0deg);
+  }
+  8% {
+    transform: rotate(-3deg);
+  }
+  14% {
+    transform: rotate(3deg);
+  }
+
+  /* 22% - 27%: Lifting up (ears perk up alertly) */
+  24% {
+    transform: rotate(0deg) scaleY(1.05);
+  }
+
+  /* 28% - 62%: Electric shock jitter */
+  28% { transform: rotate(-8deg) scaleY(1.1); }
+  32% { transform: rotate(8deg) scaleY(1.15); }
+  36% { transform: rotate(-10deg) scaleY(1.12); }
+  40% { transform: rotate(10deg) scaleY(1.15); }
+  44% { transform: rotate(-8deg) scaleY(1.1); }
+  48% { transform: rotate(8deg) scaleY(1.15); }
+  52% { transform: rotate(-10deg) scaleY(1.12); }
+  56% { transform: rotate(8deg) scaleY(1.15); }
+  60% { transform: rotate(-6deg) scaleY(1.08); }
+  62% { transform: rotate(2deg) scaleY(1.02); }
+
+  /* 64% - 74%: After-shock droop */
+  68%, 74% {
+    transform: rotate(6deg) scaleY(0.92);
+  }
+
+  /* Recovery */
+  78% {
+    transform: rotate(-4deg);
+  }
+  84% {
+    transform: rotate(2deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* Whiskers: Bristle with electricity during shock */
+.fox-whiskers-shockable {
+  animation: whiskersShockCycle var(--loop-duration) ease-in-out infinite;
+}
+
+@keyframes whiskersShockCycle {
+  0%, 26%, 64%, 100% {
+    transform: scale(1);
+  }
+  28%, 62% {
+    transform: scale(1.12);
+  }
+}
+
+/* Lightning Sparks / Bolts crackling around fox (Only active during shock 28% - 62%) */
+.fox-shock-bolts {
+  opacity: 0;
+  animation: lightningStrobe var(--loop-duration) linear infinite;
+}
+
+.fox-character-fixed.shock-manual-active .fox-shock-bolts {
+  opacity: 1 !important;
+  animation: lightningRapidFlash 0.1s linear infinite !important;
+}
+
+@keyframes lightningStrobe {
+  0%, 27% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+  28% { opacity: 1; transform: scale(1.05); }
+  30% { opacity: 0.2; }
+  32% { opacity: 1; transform: scale(1.08); }
+  35% { opacity: 0.3; }
+  38% { opacity: 1; transform: scale(1.05); }
+  41% { opacity: 0.2; }
+  44% { opacity: 1; transform: scale(1.1); }
+  47% { opacity: 0.3; }
+  50% { opacity: 1; transform: scale(1.05); }
+  53% { opacity: 0.2; }
+  56% { opacity: 1; transform: scale(1.08); }
+  59% { opacity: 0.4; }
+  61% { opacity: 0.9; transform: scale(1); }
+  63%, 100% {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+}
+
+@keyframes lightningRapidFlash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.2; }
+}
+
+/* Normal Eyes (Idle Blink, hidden only during electric shock & dazed state) */
+.fox-eyes-normal {
+  transform-box: fill-box;
+  transform-origin: center center;
+  animation: eyesNormalCycle var(--loop-duration) ease-in-out infinite;
+}
+
+@keyframes eyesNormalCycle {
+  0%, 6% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  8% {
+    /* Idle Blink */
+    transform: scaleY(0.1);
+  }
+  10%, 26% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+  /* Hidden during electric shock & dazed state */
+  28%, 73% {
+    opacity: 0;
+  }
+  75%, 100% {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+/* Shocked Wide Eyes (Visible only during electric shock in lifted state 28% - 62%) */
+.fox-eyes-shocked {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center center;
+  animation: eyesShockedCycle var(--loop-duration) ease-in-out infinite;
+}
+
+@keyframes eyesShockedCycle {
+  0%, 27% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  28%, 62% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  63%, 100% {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+}
+
+/* Dazed Spiral Eyes (Visible during after-shock 64% - 73%) */
+.fox-eyes-dazed {
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center center;
+  animation: eyesDazedCycle var(--loop-duration) ease-in-out infinite;
+}
+
+@keyframes eyesDazedCycle {
+  0%, 63% {
+    opacity: 0;
+  }
+  64%, 73% {
+    opacity: 1;
+  }
+  74%, 100% {
+    opacity: 0;
+  }
+}
+
+/* Normal Mouth (Hidden during shock) */
+.fox-mouth-normal {
+  animation: mouthNormalCycle var(--loop-duration) ease-in-out infinite;
+}
+
+@keyframes mouthNormalCycle {
+  0%, 27% {
+    opacity: 1;
+  }
+  28%, 62% {
+    opacity: 0;
+  }
+  63%, 100% {
+    opacity: 1;
+  }
+}
+
+/* Shocked Gasping Mouth (Visible during shock 28% - 62%) */
+.fox-mouth-shocked {
+  opacity: 0;
+  animation: mouthShockedCycle var(--loop-duration) ease-in-out infinite;
+}
+
+@keyframes mouthShockedCycle {
+  0%, 27% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  28%, 62% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  63%, 100% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+}
+
+/* After-Shock Smoke Puffs drifting up */
+.fox-after-smoke {
+  opacity: 0;
+  animation: smokePuffCycle var(--loop-duration) ease-out infinite;
+}
+
+@keyframes smokePuffCycle {
+  0%, 63% {
+    opacity: 0;
+    transform: translateY(0px) scale(0.5);
+  }
+  65% {
+    opacity: 0.8;
+    transform: translateY(-4px) scale(0.9);
+  }
+  71% {
+    opacity: 0.5;
+    transform: translateY(-16px) scale(1.4);
+  }
+  74%, 100% {
+    opacity: 0;
+    transform: translateY(-24px) scale(1.8);
+  }
+}
+
+/* Ambient Subtle Floating for 404 text */
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+/* Oscilloscope Line Animation */
+@keyframes graphPulse {
+  0% {
+    stroke-dashoffset: 80;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -80;
+  }
+}
+
+/* LED Flicker */
+@keyframes ledFlicker {
+  0%, 100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 3px currentColor);
+  }
+  50% {
+    opacity: 0.3;
+    filter: none;
+  }
+}
+
+/* ==========================================================================
+   Message & Call To Action
+   ========================================================================== */
+.text-content {
+  margin-bottom: 2rem;
+}
+
+.error-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 4vw, 2.25rem);
+  font-weight: 800;
+  color: var(--text-dark);
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+}
+
+.error-subtitle {
+  font-size: clamp(0.95rem, 2.5vw, 1.15rem);
+  color: var(--text-muted);
+  font-weight: 500;
+  max-width: 480px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* Back To Home Button */
+.btn-home {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  padding: 0.95rem 2.2rem;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  background: linear-gradient(135deg, var(--brand-blue) 0%, #0284c7 100%);
+  border-radius: 9999px;
+  text-decoration: none;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 
+    0 8px 24px var(--brand-glow),
+    0 2px 8px rgba(11, 127, 214, 0.25);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Shimmer sweep effect on button */
+.btn-home::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  transition: left 0.6s ease;
+}
+
+.btn-home:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 
+    0 14px 32px rgba(11, 127, 214, 0.5),
+    0 4px 12px rgba(11, 127, 214, 0.3);
+  background: linear-gradient(135deg, #0f8cf0 0%, #0396e4 100%);
+}
+
+.btn-home:hover::before {
+  left: 100%;
+}
+
+.btn-home:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 0 4px 14px var(--brand-glow);
+}
+
+.btn-home:focus-visible {
+  outline: 3px solid var(--brand-blue-light);
+  outline-offset: 4px;
+}
+
+.btn-home svg {
+  transition: transform 0.3s ease;
+}
+
+.btn-home:hover svg {
+  transform: translateX(-3px);
+}
+
+/* ==========================================================================
+   Utility & Interactive Controls (Audio / Replay badge)
+   ========================================================================== */
+.interactive-hint {
+  margin-top: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.7);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.interactive-hint span.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--brand-blue);
+  display: inline-block;
+  animation: hintPulse 2s infinite;
+}
+
+@keyframes hintPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+
+/* Sound and Pause Toggle Bar in top right */
+.control-bar {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  display: flex;
+  gap: 0.5rem;
+  z-index: 10;
+}
+
+.control-btn {
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(203, 213, 225, 0.8);
+  color: var(--text-muted);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  transition: all 0.25s ease;
+}
+
+.control-btn:hover {
+  color: var(--brand-blue);
+  border-color: var(--brand-blue);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(11, 127, 214, 0.18);
+}
+
+.control-btn.active {
+  background: var(--brand-blue);
+  color: #ffffff;
+  border-color: var(--brand-blue);
+}
+
+/* ==========================================================================
+   prefers-reduced-motion Handling
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .error-code {
+    animation: none;
+  }
+
+  .fox-character-fixed {
+    animation: none;
+    transform: translate(0px, 0px) rotate(0deg);
+  }
+
+  .fox-tail-shockable {
+    animation: none;
+  }
+
+  .fox-ears-shockable {
+    animation: none;
+  }
+
+  .fox-eyes-normal {
+    animation: none;
+    opacity: 1 !important;
+    transform: none;
+  }
+
+  .fox-eyes-shocked,
+  .fox-eyes-dazed,
+  .fox-mouth-shocked,
+  .fox-shock-bolts,
+  .fox-after-smoke,
+  .cable-electric-pulse {
+    display: none !important;
+  }
+
+  .fox-mouth-normal {
+    opacity: 1 !important;
+  }
+
+  .btn-home:hover {
+    transform: none;
+  }
+}
+
+/* Paused class toggle */
+.animation-paused .fox-character-fixed,
+.animation-paused .fox-tail-shockable,
+.animation-paused .fox-ears-shockable,
+.animation-paused .fox-eyes-normal,
+.animation-paused .fox-eyes-shocked,
+.animation-paused .fox-eyes-dazed,
+.animation-paused .fox-mouth-normal,
+.animation-paused .fox-mouth-shocked,
+.animation-paused .fox-shock-bolts,
+.animation-paused .fox-after-smoke,
+.animation-paused .cable-electric-pulse,
+.animation-paused .monitor-graph-line,
+.animation-paused .error-code {
+  animation-play-state: paused !important;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 520px) {
+  body {
+    padding: 1.5rem 1rem;
+  }
+  .error-title {
+    font-size: 1.5rem;
+  }
+  .error-subtitle {
+    font-size: 0.95rem;
+  }
+  .btn-home {
+    padding: 0.85rem 1.8rem;
+    font-size: 0.98rem;
+  }
+  .control-bar {
+    top: 0.75rem;
+    right: 0.75rem;
+  }
+}

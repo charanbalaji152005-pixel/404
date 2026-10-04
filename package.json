@@ -1,0 +1,33 @@
+{
+  "name": "animated-404-fox-page",
+  "version": "1.0.0",
+  "homepage": "https://github.com/charanbalaji152005-pixel/404/",
+  "type": "module",
+  "description": "An animated 404 error page built with React JS and animated SVG.",
+  "scripts": {
+    "dev": "vite",
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.1",
+    "vite": "^8.3.2"
+  },
+  "keywords": [
+    "404",
+    "error-page",
+    "svg-animation",
+    "css-keyframes",
+    "fox-illustration"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "gh-pages": "^6.3.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0"
+  }
+}

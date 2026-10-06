@@ -49,8 +49,8 @@ export function App() {
         {/* Large "404" & Spaced "ERROR" */}
         <Header404 />
 
-        {/* Animated Cartoon Scene (Fixed Fox with Shock Effect) */}
-        <FoxScene />
+        {/* Animated Cartoon Scene (Fox joins wires and electricity passes) */}
+        <FoxScene isPaused={isPaused} />
 
         {/* Headings & Call to Action Button */}
         <MessageSection />

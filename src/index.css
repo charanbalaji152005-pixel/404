@@ -361,18 +361,7 @@ body {
   user-select: none;
 }
 
-/* Interactive click boost */
-.scene-wrapper.interactive-zap-active .fox-character-actor {
-  animation: foxManualJitter 0.12s linear infinite !important;
-}
 
-@keyframes foxManualJitter {
-  0% { transform: translate(-3px, -64px) rotate(2deg); }
-  25% { transform: translate(3px, -66px) rotate(-2deg); }
-  50% { transform: translate(-4px, -65px) rotate(2.5deg); }
-  75% { transform: translate(4px, -64px) rotate(-2.5deg); }
-  100% { transform: translate(-3px, -64px) rotate(2deg); }
-}
 
 @keyframes foxActorCycle {
   /* 0% - 14%: Sits calmly on grass */
@@ -758,47 +747,6 @@ body {
 }
 
 /* ==========================================================================
-   Utility & Interactive Controls (Pause/Play button)
-   ========================================================================== */
-.control-bar {
-  position: absolute;
-  top: 1.25rem;
-  right: 1.25rem;
-  display: flex;
-  gap: 0.5rem;
-  z-index: 10;
-}
-
-.control-btn {
-  background: rgba(255, 255, 255, 0.85);
-  border: 1px solid rgba(203, 213, 225, 0.8);
-  color: var(--text-muted);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  transition: all 0.25s ease;
-}
-
-.control-btn:hover {
-  color: var(--brand-blue);
-  border-color: var(--brand-blue);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 14px rgba(11, 127, 214, 0.18);
-}
-
-.control-btn.active {
-  background: var(--brand-blue);
-  color: #ffffff;
-  border-color: var(--brand-blue);
-}
-
-/* ==========================================================================
    prefers-reduced-motion Handling
    ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
@@ -846,26 +794,6 @@ body {
   }
 }
 
-/* Paused class toggle */
-.animation-paused .fox-character-actor,
-.animation-paused .fox-tail-actor,
-.animation-paused .fox-ears-actor,
-.animation-paused .fox-eyes-normal,
-.animation-paused .fox-eyes-focused,
-.animation-paused .fox-eyes-dazed,
-.animation-paused .fox-mouth-normal,
-.animation-paused .fox-after-smoke,
-.cable-electric-flow,
-.animation-paused .wire-contact-spark,
-.animation-paused .monitor-wave-offline,
-.animation-paused .monitor-wave-online,
-.animation-paused .monitor-screen-glass,
-.animation-paused .fox-skeleton-view,
-.animation-paused .skeleton-bones,
-.animation-paused .error-code {
-  animation-play-state: paused !important;
-}
-
 /* Mobile Responsiveness */
 @media (max-width: 520px) {
   body {
@@ -877,8 +805,5 @@ body {
   .error-subtitle {
     font-size: 0.95rem;
   }
-  .control-bar {
-    top: 0.75rem;
-    right: 0.75rem;
-  }
 }
+

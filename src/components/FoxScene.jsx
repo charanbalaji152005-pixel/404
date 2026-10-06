@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React from 'react';
 
 /**
  * Animated SVG Cartoon Scene
@@ -14,46 +14,17 @@ import React, { useRef, useEffect, useState } from 'react';
  *      revealing a glowing cartoon skeleton inside (skull, spine, ribs, pelvis, limb bones, tail vertebrae).
  *    - No background glowing halo effects; focus is cleanly on the transparent skeleton view.
  * 6. Fox descends back to the grass, dazed with comical spiral eyes and rising smoke puffs, then resets.
+ *
+ * All actions execute automatically in a continuous, seamless flow without pause buttons or click triggers.
  */
-export function FoxScene({ isPaused = false }) {
-  const svgRef = useRef(null);
-  const [interactiveZap, setInteractiveZap] = useState(false);
-
-  // Synchronize native SVG SMIL animations with pause state
-  useEffect(() => {
-    if (!svgRef.current) return;
-    try {
-      if (isPaused) {
-        if (typeof svgRef.current.pauseAnimations === 'function') {
-          svgRef.current.pauseAnimations();
-        }
-      } else {
-        if (typeof svgRef.current.unpauseAnimations === 'function') {
-          svgRef.current.unpauseAnimations();
-        }
-      }
-    } catch {
-      // Graceful fallback if SMIL control unavailable
-    }
-  }, [isPaused]);
-
-  const handleSceneClick = () => {
-    setInteractiveZap(true);
-    setTimeout(() => {
-      setInteractiveZap(false);
-    }, 1200);
-  };
-
+export function FoxScene() {
   return (
     <div
-      className={`scene-wrapper ${interactiveZap ? 'interactive-zap-active' : ''}`}
+      className="scene-wrapper"
       role="region"
       aria-label="Animated cartoon illustration of a fox joining severed power wires with its hands, lifting up into mid-air, and getting an electric shock with a transparent cartoon skeleton X-ray effect"
-      onClick={handleSceneClick}
-      style={{ cursor: 'pointer' }}
     >
       <svg
-        ref={svgRef}
         className="scene-svg"
         viewBox="0 0 640 380"
         fill="none"
